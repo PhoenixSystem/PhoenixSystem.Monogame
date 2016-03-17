@@ -16,7 +16,7 @@ namespace PhoenixSystem.Monogame.Render
 
         public SpriteFrame GetSpriteFrame(string animation, int frameIndex)
         {
-            return _spriteSheet.Sprite(Animations[animation][frameIndex]);
+            return _spriteSheet.SpriteList[Animations[animation][frameIndex]];
         }
     }
 }
