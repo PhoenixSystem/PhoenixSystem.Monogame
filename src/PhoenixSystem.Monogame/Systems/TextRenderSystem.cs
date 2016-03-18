@@ -37,7 +37,7 @@ namespace PhoenixSystem.Monogame.Systems
                 var font = aspect.GetComponent<SpriteFontComponent>().Font;
                 var text = aspect.GetComponent<StringComponent>().Text;
                 var pos = aspect.GetComponent<PositionComponent>().CurrentPosition;
-                var color = aspect.GetComponent<ColorComponent>().Color ?? Color.Black;
+                var color = aspect.GetComponent<ColorComponent>().Color;
                 var scale = aspect.GetComponent<ScaleComponent>().Factor;
                 var layerDepth = aspect.GetComponent<RenderLayerComponent>().Depth;
                 _spriteBatch.DrawString(font, text, pos, color, 0, Vector2.Zero, scale, SpriteEffects.None, 0);
