@@ -11,7 +11,7 @@ using PhoenixSystem.Engine.Channel;
 using PhoenixSystem.Engine.Extensions;
 using PhoenixSystem.Monogame.Components;
 
-namespace PhoenixSystemMonogame.Systems
+namespace PhoenixSystem.Monogame.Systems
 {
     public class AlphaTweenSystem : BaseSystem
     {
