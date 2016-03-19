@@ -91,7 +91,7 @@ namespace TestBed
             te.CreateTextRenderEntity("Some Text", Color.Black, new Vector2(100, 100), 5, 1.0f, font);
             var teMove = _gameManager.EntityManager.Get("text2", new string[] { "default" });
             teMove.CreateTextRenderEntity("I'm Moving!", Color.Black, new Vector2(1, 1), 5, 1.0f, font)
-                    .AddComponent(new VelocityComponent() { Direction = new Vector2(1, 1), Speed = new Vector2(15, 15) });
+                    .AddComponent(new VelocityComponent() { Direction = new Vector2(1, 1), Speed = new Vector2(30, 0) });
             var teSprite = _gameManager.EntityManager.Get("sprite");
             teSprite.MakeTextureRenderAspect(new Vector2(150, 150), frame.IsRotated, frame.Origin, frame.SourceRectangle,
                                                 frame.Texture, SpriteEffects.None, Color.White, 1.0f, 0.0f)
@@ -102,7 +102,8 @@ namespace TestBed
                                                 CurrentFrameIndex = 0,
                                                 ShouldLoop = true,
                                                 FPS = 8.0f
-                                            });
+                                            })
+                                            .AddComponent(new VelocityComponent() { Direction = new Vector2(1, 1), Speed = new Vector2(30, 0) }); ;
 
             var teFadingSprite = _gameManager.EntityManager.Get("fadingSprite");
             teFadingSprite.MakeTextureRenderAspect(new Vector2(300, 150), frame.IsRotated, frame.Origin, frame.SourceRectangle,
@@ -120,7 +121,7 @@ namespace TestBed
                                                             From = Color.White,
                                                             To = Color.Transparent,
                                                             Loop = true,
-                                                            DurationInSeconds= 8.0f
+                                                            DurationInSeconds= 2.0f
                                                         });
             _gameManager.AddEntity(te);
             _gameManager.AddEntity(teMove);
