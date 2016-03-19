@@ -10,8 +10,8 @@ using System.Threading.Tasks;
 
 namespace PhoenixSystem.Monogame.Aspects
 {
-    [AssociatedComponents(typeof(AlphaTweenComponent),typeof(ColorComponent))]
-    public class AlphaTweenAspect :BaseAspect
+    [AssociatedComponents(typeof(LerpColorComponent),typeof(ColorComponent))]
+    public class LerpColorAspect :BaseAspect
     {
         
     }
