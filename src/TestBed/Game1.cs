@@ -80,12 +80,18 @@ namespace TestBed
             SpriteAnimationSystem spriteAnimationSystem = new SpriteAnimationSystem(animationCache, _channelManager, 30, "default");
             LerpColorSystem alphaTweenSystem = new LerpColorSystem(_channelManager, 40, "default");
             Camera2dSystem cameraSystem = new Camera2dSystem(_channelManager, 50, "all");
+            TestBedIntentSystem testBedIntentSystem = new TestBedIntentSystem(_channelManager, 10, "all");
+            CameraMovementSystem cameraMovementSystem = new CameraMovementSystem(_channelManager, 20, "default");
             _gameManager.AddSystem(movementSystem);
             _gameManager.AddSystem(textureRenderSystem);
             _gameManager.AddSystem(spriteAnimationSystem);
             _gameManager.AddSystem(alphaTweenSystem);
             _gameManager.AddSystem(cameraSystem);
+            _gameManager.AddSystem(testBedIntentSystem);
+            _gameManager.AddSystem(cameraMovementSystem);
 
+            var movementEntity = _gameManager.EntityManager.Get("movementEntity").AddComponent(new CameraIntentMappingComponent()).AddComponent(new TestBedIntentComponent());
+            _gameManager.AddEntity(movementEntity);
 
             //create camera entity
             var camera = _gameManager.EntityManager.Get("camera", new string[] { "all" });
@@ -98,7 +104,8 @@ namespace TestBed
                       Limits = new Rectangle(0,0,GraphicsDevice.Viewport.Width * 2, GraphicsDevice.Viewport.Height * 2)
                   })
                   .AddComponent(new RotationComponent())
-                  .AddComponent(new SpriteBatchIdentifierComponent() { Identifier = "main" });
+                  .AddComponent(new SpriteBatchIdentifierComponent() { Identifier = "main" })
+                  .AddComponent(new VelocityComponent() { Speed = new Vector2(250, 250) });
             _gameManager.AddEntity(camera);
             var spriteBatch = _gameManager.EntityManager.Get("mainSpriteBatch", new string[] { "all" }).AddComponent(new SpriteBatchComponent()).AddComponent(new SpriteBatchIdentifierComponent() { Identifier = "main" });
             _gameManager.AddEntity(spriteBatch);
