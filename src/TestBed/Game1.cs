@@ -29,6 +29,8 @@ namespace TestBed
             graphics.PreferredBackBufferHeight = 720;
             graphics.PreferredBackBufferWidth = 1280;
             Content.RootDirectory = "Content";
+
+            // set up the Phoenix Framework by creating a channel manager, entity manager, and game manager
             _channelManager = new ChannelManager();
             _fileReader = fileReader;
             var entityManager = new EntityManager(_channelManager, new EntityPool());
@@ -54,15 +56,15 @@ namespace TestBed
         /// </summary>
         protected override void LoadContent()
         {
-
-
-            // Create a new SpriteBatch, which can be used to draw textures.
+            
+            // load some content and initialize the animationCache
             font = Content.Load<SpriteFont>("Status");
             SpriteSheetLoader loader = new SpriteSheetLoader(Content, _fileReader);
             var ss = loader.Load("fanatiblaster");
 
             var frame = ss.SpriteList[SpriteNames.Down_spritesheetforthegame_1_0];
 
+            // the animation cache couuld be much more feature rich
             var animationCache = new AnimationCache(ss);
             animationCache.Animations.Add("down", new string[] {
                 SpriteNames.Down_spritesheetforthegame_1_1,
@@ -75,6 +77,9 @@ namespace TestBed
                 SpriteNames.Down_spritesheetforthegame_1_8
             });
 
+            // set up the systems.  they get executed in order of priority (least to greatest) in the update and (for IDrawable systems) draw methods
+            // the list of channels determines if the system executes based on the current channel.  "all" executes no matter what the current channel
+            // is.  "default" is the default initial channel.  This is extremely useful for dealing with gamestates (such as paused etc)
             MovementSystem movementSystem = new MovementSystem(_channelManager, 25, new string[] { "default" });
             SpriteBatchRenderSystem textureRenderSystem = new SpriteBatchRenderSystem(GraphicsDevice, _channelManager, 101, "default");
             SpriteAnimationSystem spriteAnimationSystem = new SpriteAnimationSystem(animationCache, _channelManager, 30, "default");
@@ -90,12 +95,14 @@ namespace TestBed
             _gameManager.AddSystem(testBedIntentSystem);
             _gameManager.AddSystem(cameraMovementSystem);
 
+            // this entity simply triggers the necessary aspects to get the Movement and Intent systems.
+            // this way we can use simple keyboard input to slide the camera around and zoom it in and out.
             var movementEntity = _gameManager.EntityManager.Get("movementEntity")
                                                 .AddComponent(new CameraIntentMappingComponent())
                                                 .AddComponent(new TestBedIntentComponent());
             _gameManager.AddEntity(movementEntity);
 
-            //create camera entity
+            //create camera entity.  We give it a VelocityComponent so it will be moved by our movementsystem
             var camera = _gameManager.EntityManager.Get("camera", new string[] { "all" });
             camera.AddComponent(new PositionComponent() { CurrentPosition = new Vector2(0,0) })
                   .AddComponent(new Camera2dComponent(GraphicsDevice.Viewport)
@@ -110,23 +117,28 @@ namespace TestBed
                   .AddComponent(new VelocityComponent() { Speed = new Vector2(250, 250) });
             _gameManager.AddEntity(camera);
 
+            // this triggers the spritebatch system with an identifier of main.
             var spriteBatch = _gameManager.EntityManager.Get("mainSpriteBatch", new string[] { "all" })
                                         .AddComponent(new SpriteBatchComponent())
                                         .AddComponent(new SpriteBatchIdentifierComponent() { Identifier = "main" });
             _gameManager.AddEntity(spriteBatch);
 
+            // a text component.  uses a helper extension method to add a bunch of components under the hood
             var te = _gameManager.EntityManager.Get("text", new string[] { "default" });
             te.CreateTextRenderEntity("Use W,A,S,D to move the camera.\nQ,E to zoom", Color.Black, new Vector2(0, 0), 5, 1.0f, font, "main");
 
+            // more text.  I put this over on the right edge when I was messing with the camera to make sure the boundaries were working
             var te2 = _gameManager.EntityManager.Get("textWidth")
                                     .CreateTextRenderEntity(string.Format("({0},{1})", GraphicsDevice.Viewport.Width * 2, GraphicsDevice.Viewport.Height * 2), Color.Black,
                                                                 new Vector2(GraphicsDevice.Viewport.Width * 2 - 200, 0), 5, 1.0f, font, "main");
             _gameManager.AddEntity(te2);
 
+            // more text.  In this example we add velocity just to show how easy it is to make something move (or able to move)
             var teMove = _gameManager.EntityManager.Get("text2", new string[] { "default" });
             teMove.CreateTextRenderEntity("I'm Moving!", Color.Black, new Vector2(0, 250), 5, 1.0f, font, "main")
                     .AddComponent(new VelocityComponent() { Direction = new Vector2(1, 1), Speed = new Vector2(75, 0) });
 
+            // this is the sprite.  we make this animated by adding an animation component.  Also it moves because velocity.
             var teSprite = _gameManager.EntityManager.Get("sprite");
             teSprite.MakeTextureRenderAspect(new Vector2(150, 150), frame.IsRotated, frame.Origin, frame.SourceRectangle,
                                                 frame.Texture, SpriteEffects.None, Color.White, 1.0f, 0.0f, "main")
@@ -140,6 +152,7 @@ namespace TestBed
                                             })
                                             .AddComponent(new VelocityComponent() { Direction = new Vector2(1, 1), Speed = new Vector2(30, 0) }); ;
 
+            // a sprite that's also animated and fades in and out using the LerpColorComponent
             var teFadingSprite = _gameManager.EntityManager.Get("fadingSprite");
             teFadingSprite.MakeTextureRenderAspect(new Vector2(300, 150), frame.IsRotated, frame.Origin, frame.SourceRectangle,
                                                         frame.Texture, SpriteEffects.None, Color.White, 1.0f, 0.0f, "main")
@@ -158,6 +171,7 @@ namespace TestBed
                                                             Loop = true,
                                                             DurationInSeconds = 2.0f
                                                         });
+            // all entities need to be added to the game manager or they do nothing.
             _gameManager.AddEntity(te);
             _gameManager.AddEntity(teMove);
             _gameManager.AddEntity(teSprite);
