@@ -17,7 +17,6 @@ namespace TestBed
     public class Game : Microsoft.Xna.Framework.Game
     {
         GraphicsDeviceManager graphics;
-        SpriteBatch spriteBatch;
         TestBedGameManager _gameManager;
         SpriteFont font;
         IChannelManager _channelManager;
@@ -27,6 +26,8 @@ namespace TestBed
         {
 
             graphics = new GraphicsDeviceManager(this);
+            graphics.PreferredBackBufferHeight = 720;
+            graphics.PreferredBackBufferWidth = 1280;
             Content.RootDirectory = "Content";
             _channelManager = new ChannelManager();
             _fileReader = fileReader;
@@ -56,8 +57,6 @@ namespace TestBed
 
 
             // Create a new SpriteBatch, which can be used to draw textures.
-            spriteBatch = new SpriteBatch(GraphicsDevice);
-
             font = Content.Load<SpriteFont>("Status");
             SpriteSheetLoader loader = new SpriteSheetLoader(Content, _fileReader);
             var ss = loader.Load("fanatiblaster");
@@ -77,24 +76,44 @@ namespace TestBed
             });
 
             MovementSystem movementSystem = new MovementSystem(_channelManager, 25, new string[] { "default" });
-            TextRenderSystem textRenderSystem = new TextRenderSystem(spriteBatch, _channelManager, 100, "default");
-            TextureRenderSystem textureRenderSystem = new TextureRenderSystem(spriteBatch, _channelManager, 101, "default");
+            SpriteBatchRenderSystem textureRenderSystem = new SpriteBatchRenderSystem(GraphicsDevice, _channelManager, 101, "default");
             SpriteAnimationSystem spriteAnimationSystem = new SpriteAnimationSystem(animationCache, _channelManager, 30, "default");
             LerpColorSystem alphaTweenSystem = new LerpColorSystem(_channelManager, 40, "default");
-            _gameManager.AddSystem(textRenderSystem);
+            Camera2dSystem cameraSystem = new Camera2dSystem(_channelManager, 50, "all");
             _gameManager.AddSystem(movementSystem);
             _gameManager.AddSystem(textureRenderSystem);
             _gameManager.AddSystem(spriteAnimationSystem);
             _gameManager.AddSystem(alphaTweenSystem);
+            _gameManager.AddSystem(cameraSystem);
 
+
+            //create camera entity
+            var camera = _gameManager.EntityManager.Get("camera", new string[] { "all" });
+            camera.AddComponent(new PositionComponent() { CurrentPosition = new Vector2(5000,0) })
+                  .AddComponent(new Camera2dComponent(GraphicsDevice.Viewport)
+                  {
+                      MaxZoom = 1.5f,
+                      MinZoom = .5f,
+                      Zoom = 1f,
+                      Limits = new Rectangle(0,0,GraphicsDevice.Viewport.Width * 2, GraphicsDevice.Viewport.Height * 2)
+                  })
+                  .AddComponent(new RotationComponent())
+                  .AddComponent(new SpriteBatchIdentifierComponent() { Identifier = "main" });
+            _gameManager.AddEntity(camera);
+            var spriteBatch = _gameManager.EntityManager.Get("mainSpriteBatch", new string[] { "all" }).AddComponent(new SpriteBatchComponent()).AddComponent(new SpriteBatchIdentifierComponent() { Identifier = "main" });
+            _gameManager.AddEntity(spriteBatch);
             var te = _gameManager.EntityManager.Get("text", new string[] { "default" });
-            te.CreateTextRenderEntity("Some Text", Color.Black, new Vector2(100, 100), 5, 1.0f, font);
+            te.CreateTextRenderEntity("(0,0)", Color.Black, new Vector2(0, 0), 5, 1.0f, font, "main");
+
+            var te2 = _gameManager.EntityManager.Get("text2").CreateTextRenderEntity(string.Format("({0},{1})", GraphicsDevice.Viewport.Width * 2, GraphicsDevice.Viewport.Height * 2), Color.Black,
+                                                                new Vector2(GraphicsDevice.Viewport.Width * 2 - 200, 0), 5, 1.0f, font, "main");
+            _gameManager.AddEntity(te2);
             var teMove = _gameManager.EntityManager.Get("text2", new string[] { "default" });
-            teMove.CreateTextRenderEntity("I'm Moving!", Color.Black, new Vector2(1, 1), 5, 1.0f, font)
+            teMove.CreateTextRenderEntity("I'm Moving!", Color.Black, new Vector2(1, 1), 5, 1.0f, font, "main")
                     .AddComponent(new VelocityComponent() { Direction = new Vector2(1, 1), Speed = new Vector2(30, 0) });
             var teSprite = _gameManager.EntityManager.Get("sprite");
             teSprite.MakeTextureRenderAspect(new Vector2(150, 150), frame.IsRotated, frame.Origin, frame.SourceRectangle,
-                                                frame.Texture, SpriteEffects.None, Color.White, 1.0f, 0.0f)
+                                                frame.Texture, SpriteEffects.None, Color.White, 1.0f, 0.0f, "main")
                                             .AddComponent(new AnimationComponent()
                                             {
                                                 Active = true,
@@ -107,7 +126,7 @@ namespace TestBed
 
             var teFadingSprite = _gameManager.EntityManager.Get("fadingSprite");
             teFadingSprite.MakeTextureRenderAspect(new Vector2(300, 150), frame.IsRotated, frame.Origin, frame.SourceRectangle,
-                                                        frame.Texture, SpriteEffects.None, Color.White, 1.0f, 0.0f)
+                                                        frame.Texture, SpriteEffects.None, Color.White, 1.0f, 0.0f, "main")
                                                         .AddComponent(new AnimationComponent()
                                                         {
                                                             Active = true,
@@ -121,7 +140,7 @@ namespace TestBed
                                                             From = Color.White,
                                                             To = Color.Transparent,
                                                             Loop = true,
-                                                            DurationInSeconds= 2.0f
+                                                            DurationInSeconds = 2.0f
                                                         });
             _gameManager.AddEntity(te);
             _gameManager.AddEntity(teMove);
@@ -160,9 +179,7 @@ namespace TestBed
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
-            spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend);
             _gameManager.Draw(new MonogameTickEvent(gameTime));
-            spriteBatch.End();
             base.Draw(gameTime);
         }
     }
