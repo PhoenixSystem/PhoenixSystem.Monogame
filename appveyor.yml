@@ -23,11 +23,11 @@ nuget:
 configuration: Release
 
 build:
-  project: src\PhoenixSystemMonogame.sln
+  project: src\PhoenixSystem.Monogame.sln
   publish_nuget: true
   
 before_build:
-  nuget restore src\PhoenixSystemMonogame.sln
+  nuget restore src\PhoenixSystem.Monogame.sln
 
 artifacts:
   - path: out\*.nupkg
