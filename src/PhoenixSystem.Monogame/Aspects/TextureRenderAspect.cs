@@ -7,8 +7,9 @@ using PhoenixSystem.Monogame.Components;
 
 namespace PhoenixSystem.Monogame.Aspects
 {
-    [AssociatedComponents(typeof (PositionComponent), typeof (TextureRenderComponent),
-        typeof (ColorComponent), typeof (ScaleComponent), typeof (RotationComponent))]
+    [AssociatedComponents(typeof(PositionComponent), typeof(TextureRenderComponent),
+        typeof(ColorComponent), typeof(ScaleComponent), typeof(RotationComponent),
+        typeof(SpriteBatchIdentifierComponent))]
     public class TextureRenderAspect : BaseAspect
     {
     }
@@ -17,9 +18,9 @@ namespace PhoenixSystem.Monogame.Aspects
     {
         public static IEntity MakeTextureRenderAspect(this IEntity entity, Vector2 position, bool isRotated,
             Vector2 origin, Rectangle sourceRect, Texture2D texture,
-            SpriteEffects effects, Color color, float scale, float rotation)
+            SpriteEffects effects, Color color, float scale, float rotation, string spriteBatchIdentifier)
         {
-            return entity.AddComponent(new PositionComponent {CurrentPosition = position})
+            return entity.AddComponent(new PositionComponent { CurrentPosition = position })
                 .AddComponent(new TextureRenderComponent
                 {
                     IsRotated = isRotated,
@@ -28,10 +29,11 @@ namespace PhoenixSystem.Monogame.Aspects
                     SourceRect = sourceRect,
                     Texture = texture
                 })
-                .AddComponent(new ColorComponent {Color = color})
-                .AddComponent(new ScaleComponent {Factor = scale})
-                .AddComponent(new RotationComponent {Factor = rotation}
-                );
+                .AddComponent(new ColorComponent { Color = color })
+                .AddComponent(new ScaleComponent { Factor = scale })
+                .AddComponent(new RotationComponent { Factor = rotation })
+                .AddComponent(new SpriteBatchIdentifierComponent { Identifier = spriteBatchIdentifier })
+                ;
         }
     }
 }

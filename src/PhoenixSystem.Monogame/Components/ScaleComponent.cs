@@ -9,12 +9,12 @@ namespace PhoenixSystem.Monogame.Components
 
         public override IComponent Clone()
         {
-            throw new NotImplementedException();
+            return new ScaleComponent() { Factor = this.Factor };
         }
 
         public override void Reset()
         {
-            throw new NotImplementedException();
+            this.Factor = 1.0f;
         }
     }
 }

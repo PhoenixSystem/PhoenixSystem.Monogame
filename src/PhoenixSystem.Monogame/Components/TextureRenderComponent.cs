@@ -11,7 +11,6 @@ namespace PhoenixSystem.Monogame.Components
         public Vector2 Origin { get; set; }
         public SpriteEffects SpriteEffects { get; set; }
         public bool IsRotated { get; set; }
-
         public override IComponent Clone()
         {
             return new TextureRenderComponent

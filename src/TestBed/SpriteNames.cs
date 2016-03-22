@@ -1,0 +1,84 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace TestBed
+{
+    public class SpriteNames
+    {
+        public const string Dart_down = "dart_down";
+        public const string Dart_left = "dart_left";
+        public const string Dart_right = "dart_right";
+        public const string Dart_up = "dart_up";
+        public const string Down_spritesheetforthegame_1_0 = "down/spritesheetforthegame_1_0";
+        public const string Down_spritesheetforthegame_1_1 = "down/spritesheetforthegame_1_1";
+        public const string Down_spritesheetforthegame_1_2 = "down/spritesheetforthegame_1_2";
+        public const string Down_spritesheetforthegame_1_3 = "down/spritesheetforthegame_1_3";
+        public const string Down_spritesheetforthegame_1_4 = "down/spritesheetforthegame_1_4";
+        public const string Down_spritesheetforthegame_1_5 = "down/spritesheetforthegame_1_5";
+        public const string Down_spritesheetforthegame_1_6 = "down/spritesheetforthegame_1_6";
+        public const string Down_spritesheetforthegame_1_7 = "down/spritesheetforthegame_1_7";
+        public const string Down_spritesheetforthegame_1_8 = "down/spritesheetforthegame_1_8";
+        public const string Explosion_sprite_sheet_i0_0_0 = "explosion_sprite_sheet_i0_0_0";
+        public const string Explosion_sprite_sheet_i0_0_1 = "explosion_sprite_sheet_i0_0_1";
+        public const string Explosion_sprite_sheet_i0_0_2 = "explosion_sprite_sheet_i0_0_2";
+        public const string Explosion_sprite_sheet_i0_0_3 = "explosion_sprite_sheet_i0_0_3";
+        public const string Explosion_sprite_sheet_i0_0_4 = "explosion_sprite_sheet_i0_0_4";
+        public const string Explosion_sprite_sheet_i0_1_0 = "explosion_sprite_sheet_i0_1_0";
+        public const string Explosion_sprite_sheet_i0_1_1 = "explosion_sprite_sheet_i0_1_1";
+        public const string Explosion_sprite_sheet_i0_1_2 = "explosion_sprite_sheet_i0_1_2";
+        public const string Explosion_sprite_sheet_i0_1_3 = "explosion_sprite_sheet_i0_1_3";
+        public const string Explosion_sprite_sheet_i0_1_4 = "explosion_sprite_sheet_i0_1_4";
+        public const string Explosion_sprite_sheet_i0_2_0 = "explosion_sprite_sheet_i0_2_0";
+        public const string Explosion_sprite_sheet_i0_2_1 = "explosion_sprite_sheet_i0_2_1";
+        public const string Explosion_sprite_sheet_i0_2_2 = "explosion_sprite_sheet_i0_2_2";
+        public const string Explosion_sprite_sheet_i0_2_3 = "explosion_sprite_sheet_i0_2_3";
+        public const string Explosion_sprite_sheet_i0_2_4 = "explosion_sprite_sheet_i0_2_4";
+        public const string Explosion_sprite_sheet_i0_3_0 = "explosion_sprite_sheet_i0_3_0";
+        public const string Explosion_sprite_sheet_i0_3_1 = "explosion_sprite_sheet_i0_3_1";
+        public const string Explosion_sprite_sheet_i0_3_2 = "explosion_sprite_sheet_i0_3_2";
+        public const string Explosion_sprite_sheet_i0_3_3 = "explosion_sprite_sheet_i0_3_3";
+        public const string Explosion_sprite_sheet_i0_3_4 = "explosion_sprite_sheet_i0_3_4";
+        public const string Explosion_sprite_sheet_i0_4_0 = "explosion_sprite_sheet_i0_4_0";
+        public const string Explosion_sprite_sheet_i0_4_1 = "explosion_sprite_sheet_i0_4_1";
+        public const string Explosion_sprite_sheet_i0_4_2 = "explosion_sprite_sheet_i0_4_2";
+        public const string Explosion_sprite_sheet_i0_4_3 = "explosion_sprite_sheet_i0_4_3";
+        public const string Explosion_sprite_sheet_i0_4_4 = "explosion_sprite_sheet_i0_4_4";
+        public const string Left_folderbaddie_0_0 = "left/folderbaddie_0_0";
+        public const string Left_folderbaddie_0_1 = "left/folderbaddie_0_1";
+        public const string Left_scbaddie_0_0 = "left/scbaddie_0_0";
+        public const string Left_spritesheetforthegame_0_0 = "left/spritesheetforthegame_0_0";
+        public const string Left_spritesheetforthegame_0_1 = "left/spritesheetforthegame_0_1";
+        public const string Left_spritesheetforthegame_0_2 = "left/spritesheetforthegame_0_2";
+        public const string Left_spritesheetforthegame_0_3 = "left/spritesheetforthegame_0_3";
+        public const string Left_spritesheetforthegame_0_4 = "left/spritesheetforthegame_0_4";
+        public const string Left_spritesheetforthegame_0_5 = "left/spritesheetforthegame_0_5";
+        public const string Left_spritesheetforthegame_0_6 = "left/spritesheetforthegame_0_6";
+        public const string Left_spritesheetforthegame_0_7 = "left/spritesheetforthegame_0_7";
+        public const string Left_spritesheetforthegame_0_8 = "left/spritesheetforthegame_0_8";
+        public const string Middle_scbaddie_0_1 = "middle/scbaddie_0_1";
+        public const string Right_folderbaddie_1_0 = "right/folderbaddie_1_0";
+        public const string Right_folderbaddie_1_1 = "right/folderbaddie_1_1";
+        public const string Right_scbaddie_0_2 = "right/scbaddie_0_2";
+        public const string Right_spritesheetforthegame_2_0 = "right/spritesheetforthegame_2_0";
+        public const string Right_spritesheetforthegame_2_1 = "right/spritesheetforthegame_2_1";
+        public const string Right_spritesheetforthegame_2_2 = "right/spritesheetforthegame_2_2";
+        public const string Right_spritesheetforthegame_2_3 = "right/spritesheetforthegame_2_3";
+        public const string Right_spritesheetforthegame_2_4 = "right/spritesheetforthegame_2_4";
+        public const string Right_spritesheetforthegame_2_5 = "right/spritesheetforthegame_2_5";
+        public const string Right_spritesheetforthegame_2_6 = "right/spritesheetforthegame_2_6";
+        public const string Right_spritesheetforthegame_2_7 = "right/spritesheetforthegame_2_7";
+        public const string Right_spritesheetforthegame_2_8 = "right/spritesheetforthegame_2_8";
+        public const string Up_spritesheetforthegame_3_0 = "up/spritesheetforthegame_3_0";
+        public const string Up_spritesheetforthegame_3_1 = "up/spritesheetforthegame_3_1";
+        public const string Up_spritesheetforthegame_3_2 = "up/spritesheetforthegame_3_2";
+        public const string Up_spritesheetforthegame_3_3 = "up/spritesheetforthegame_3_3";
+        public const string Up_spritesheetforthegame_3_4 = "up/spritesheetforthegame_3_4";
+        public const string Up_spritesheetforthegame_3_5 = "up/spritesheetforthegame_3_5";
+        public const string Up_spritesheetforthegame_3_6 = "up/spritesheetforthegame_3_6";
+        public const string Up_spritesheetforthegame_3_7 = "up/spritesheetforthegame_3_7";
+        public const string Up_spritesheetforthegame_3_8 = "up/spritesheetforthegame_3_8";
+    }
+}
