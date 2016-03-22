@@ -43,6 +43,9 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="CameraIntentMappingComponent.cs" />
+    <Compile Include="CameraMovementAspect.cs" />
+    <Compile Include="CameraMovementSystem.cs" />
     <Compile Include="FileReader.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Program.cs" />
@@ -50,6 +53,9 @@
     <Compile Include="SpriteNames.cs" />
     <Compile Include="SpriteSheetLoader.cs" />
     <Compile Include="TestBedGameManager.cs" />
+    <Compile Include="TestBedIntentAspect.cs" />
+    <Compile Include="TestBedIntentComponent.cs" />
+    <Compile Include="TestBedIntentSystem.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">
