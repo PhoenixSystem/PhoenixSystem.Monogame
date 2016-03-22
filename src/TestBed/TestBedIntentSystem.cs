@@ -51,6 +51,11 @@ namespace TestBed
                     testBedIntent.CameraMoveRight = true;
                 if (_currentState.IsKeyDown(cameraInputMap.MoveLeftKeyboard))
                     testBedIntent.CameraMoveLeft = true;
+                if (_currentState.IsKeyDown(cameraInputMap.ZoomInKeyboard))
+                    testBedIntent.CameraZoomIn = true;
+                if (_currentState.IsKeyDown(cameraInputMap.ZoomOutKeyboard))
+                    testBedIntent.CameraZoomOut = true;
+                        
             }
 
         }

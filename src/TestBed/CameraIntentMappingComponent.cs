@@ -14,6 +14,9 @@ namespace TestBed
         public Keys MoveDownKeyboard { get; set; } = Keys.S;
         public Keys MoveRightKeyboard { get; set; } = Keys.D;
         public Keys MoveLeftKeyboard { get; set; } = Keys.A;
+        public Keys ZoomOutKeyboard { get; set; } = Keys.Q;
+        public Keys ZoomInKeyboard { get; set; } = Keys.E;
+
         public override IComponent Clone()
         {
             return new CameraIntentMappingComponent()
@@ -21,7 +24,9 @@ namespace TestBed
                 MoveUpKeyboard = this.MoveUpKeyboard,
                 MoveDownKeyboard = this.MoveDownKeyboard,
                 MoveLeftKeyboard = this.MoveLeftKeyboard,
-                MoveRightKeyboard = this.MoveRightKeyboard
+                MoveRightKeyboard = this.MoveRightKeyboard,
+                ZoomOutKeyboard = this.ZoomOutKeyboard,
+                ZoomInKeyboard = this.ZoomInKeyboard
             };
         }
 
@@ -31,6 +36,8 @@ namespace TestBed
             this.MoveDownKeyboard = Keys.S;
             this.MoveRightKeyboard = Keys.D;
             this.MoveLeftKeyboard = Keys.A;
+            this.ZoomInKeyboard = Keys.E;
+            this.ZoomOutKeyboard = Keys.Q;
         }
     }
 }

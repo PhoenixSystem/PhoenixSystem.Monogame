@@ -90,12 +90,14 @@ namespace TestBed
             _gameManager.AddSystem(testBedIntentSystem);
             _gameManager.AddSystem(cameraMovementSystem);
 
-            var movementEntity = _gameManager.EntityManager.Get("movementEntity").AddComponent(new CameraIntentMappingComponent()).AddComponent(new TestBedIntentComponent());
+            var movementEntity = _gameManager.EntityManager.Get("movementEntity")
+                                                .AddComponent(new CameraIntentMappingComponent())
+                                                .AddComponent(new TestBedIntentComponent());
             _gameManager.AddEntity(movementEntity);
 
             //create camera entity
             var camera = _gameManager.EntityManager.Get("camera", new string[] { "all" });
-            camera.AddComponent(new PositionComponent() { CurrentPosition = new Vector2(5000,0) })
+            camera.AddComponent(new PositionComponent() { CurrentPosition = new Vector2(0,0) })
                   .AddComponent(new Camera2dComponent(GraphicsDevice.Viewport)
                   {
                       MaxZoom = 1.5f,
@@ -107,17 +109,24 @@ namespace TestBed
                   .AddComponent(new SpriteBatchIdentifierComponent() { Identifier = "main" })
                   .AddComponent(new VelocityComponent() { Speed = new Vector2(250, 250) });
             _gameManager.AddEntity(camera);
-            var spriteBatch = _gameManager.EntityManager.Get("mainSpriteBatch", new string[] { "all" }).AddComponent(new SpriteBatchComponent()).AddComponent(new SpriteBatchIdentifierComponent() { Identifier = "main" });
-            _gameManager.AddEntity(spriteBatch);
-            var te = _gameManager.EntityManager.Get("text", new string[] { "default" });
-            te.CreateTextRenderEntity("(0,0)", Color.Black, new Vector2(0, 0), 5, 1.0f, font, "main");
 
-            var te2 = _gameManager.EntityManager.Get("text2").CreateTextRenderEntity(string.Format("({0},{1})", GraphicsDevice.Viewport.Width * 2, GraphicsDevice.Viewport.Height * 2), Color.Black,
+            var spriteBatch = _gameManager.EntityManager.Get("mainSpriteBatch", new string[] { "all" })
+                                        .AddComponent(new SpriteBatchComponent())
+                                        .AddComponent(new SpriteBatchIdentifierComponent() { Identifier = "main" });
+            _gameManager.AddEntity(spriteBatch);
+
+            var te = _gameManager.EntityManager.Get("text", new string[] { "default" });
+            te.CreateTextRenderEntity("Use W,A,S,D to move the camera.\nQ,E to zoom", Color.Black, new Vector2(0, 0), 5, 1.0f, font, "main");
+
+            var te2 = _gameManager.EntityManager.Get("textWidth")
+                                    .CreateTextRenderEntity(string.Format("({0},{1})", GraphicsDevice.Viewport.Width * 2, GraphicsDevice.Viewport.Height * 2), Color.Black,
                                                                 new Vector2(GraphicsDevice.Viewport.Width * 2 - 200, 0), 5, 1.0f, font, "main");
             _gameManager.AddEntity(te2);
+
             var teMove = _gameManager.EntityManager.Get("text2", new string[] { "default" });
-            teMove.CreateTextRenderEntity("I'm Moving!", Color.Black, new Vector2(1, 1), 5, 1.0f, font, "main")
-                    .AddComponent(new VelocityComponent() { Direction = new Vector2(1, 1), Speed = new Vector2(30, 0) });
+            teMove.CreateTextRenderEntity("I'm Moving!", Color.Black, new Vector2(0, 250), 5, 1.0f, font, "main")
+                    .AddComponent(new VelocityComponent() { Direction = new Vector2(1, 1), Speed = new Vector2(75, 0) });
+
             var teSprite = _gameManager.EntityManager.Get("sprite");
             teSprite.MakeTextureRenderAspect(new Vector2(150, 150), frame.IsRotated, frame.Origin, frame.SourceRectangle,
                                                 frame.Texture, SpriteEffects.None, Color.White, 1.0f, 0.0f, "main")

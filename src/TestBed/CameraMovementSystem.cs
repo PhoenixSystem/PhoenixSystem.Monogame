@@ -42,7 +42,7 @@ namespace TestBed
             {
                 var velocity = cameraAspect.GetComponent<VelocityComponent>();
                 var intent = intentAspect.GetComponent<TestBedIntentComponent>();
-
+                var camera = cameraAspect.GetComponent<Camera2dComponent>();
                 Vector2 direction = new Vector2();
 
                 if (intent.CameraMoveDown)
@@ -55,6 +55,10 @@ namespace TestBed
                 if (intent.CameraMoveRight)
                     direction.X = 1;
 
+                if (intent.CameraZoomIn)
+                    camera.Zoom += .05f;
+                if (intent.CameraZoomOut)
+                    camera.Zoom -= .05f;
                 velocity.Direction = direction;
                    
             }

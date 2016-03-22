@@ -13,6 +13,8 @@ namespace TestBed
         public bool CameraMoveLeft { get; set; } = false;
         public bool CameraMoveUp { get; set; } = false;
         public bool CameraMoveDown { get; set; } = false;
+        public bool CameraZoomIn { get; set; } = false;
+        public bool CameraZoomOut { get; set; } = false;
 
         public override IComponent Clone()
         {
@@ -21,13 +23,15 @@ namespace TestBed
                 CameraMoveDown = this.CameraMoveDown,
                 CameraMoveLeft = this.CameraMoveLeft,
                 CameraMoveRight = this.CameraMoveRight,
-                CameraMoveUp = this.CameraMoveUp
+                CameraMoveUp = this.CameraMoveUp,
+                CameraZoomIn = this.CameraZoomIn,
+                CameraZoomOut = this.CameraZoomOut
             };
         }
 
         public override void Reset()
         {
-            CameraMoveUp = CameraMoveRight = CameraMoveLeft = CameraMoveDown = false;
+            CameraZoomIn = CameraZoomOut = CameraMoveUp = CameraMoveRight = CameraMoveLeft = CameraMoveDown = false;
         }
     }
 }
