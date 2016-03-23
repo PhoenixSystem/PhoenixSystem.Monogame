@@ -95,6 +95,9 @@ namespace TestBed
             _gameManager.AddSystem(testBedIntentSystem);
             _gameManager.AddSystem(cameraMovementSystem);
 
+            // create some entities to test some stuff out... usually you'd have a manager class set up to manage the lifetime of entities (create and destroy them etc)
+            // but in this case we're just playing around.
+
             // this entity simply triggers the necessary aspects to get the Movement and Intent systems.
             // this way we can use simple keyboard input to slide the camera around and zoom it in and out.
             var movementEntity = _gameManager.EntityManager.Get("movementEntity")

@@ -58,8 +58,9 @@
     <Compile Include="TestBedIntentSystem.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="MonoGame.Framework">
-      <HintPath>$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\Windows\MonoGame.Framework.dll</HintPath>
+    <Reference Include="MonoGame.Framework, Version=3.5.0.1678, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MonoGame.Framework.WindowsDX.3.5.0.1678\lib\net40\MonoGame.Framework.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="PhoenixSystem.Engine, Version=0.0.1.24, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\PhoenixSystem.Engine.0.0.1.24-beta\lib\portable-net45+win+wpa81+MonoAndroid10+xamarinios10+MonoTouch10\PhoenixSystem.Engine.dll</HintPath>
