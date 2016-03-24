@@ -5,7 +5,7 @@ namespace PhoenixSystem.Monogame.Render.Sprite
 {
     public class SpriteSheet
     {
-        private Texture2D Texture
+        public Texture2D Texture
         {
             get;
         }
