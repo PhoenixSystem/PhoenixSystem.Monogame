@@ -21,19 +21,6 @@
 			this.fileReader = fileReader;
 		}
 
-		public SpriteSheet MultiLoad(string imageResourceFormat, int numSheets)
-		{
-			SpriteSheet result = new SpriteSheet();
-			for (int i = 0; i < numSheets; i++)
-			{
-				string imageResource = string.Format(imageResourceFormat, i);
-
-				SpriteSheet tmp = Load(imageResource);
-				result.Add(tmp);
-			}
-			return result;
-		}
-
 
 		public SpriteSheet Load(string imageResource)
 		{
@@ -42,10 +29,10 @@
 			var dataFile = Path.Combine(
 				this.contentManager.RootDirectory,
 				Path.ChangeExtension(imageResource, "txt"));
-
+            
 			var dataFileLines = fileReader.GetFileContents(dataFile);
 
-			var sheet = new SpriteSheet();
+			var sheet = new SpriteSheet(texture);
 
 			foreach (
 				var cols in
