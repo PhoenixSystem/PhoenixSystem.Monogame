@@ -1,14 +1,18 @@
+using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 
 namespace PhoenixSystem.Monogame.Render.Sprite
 {
     public class SpriteSheet
     {
-        
-
-        public SpriteSheet()
+        private Texture2D Texture
         {
-            
+            get;
+        }
+
+        public SpriteSheet(Texture2D texture)
+        {
+            Texture = texture;
         }
 
         public IDictionary<string, SpriteFrame> SpriteList { get; private set; } = new Dictionary<string, SpriteFrame>();
@@ -20,6 +24,6 @@ namespace PhoenixSystem.Monogame.Render.Sprite
                 SpriteList.Add(frame);
             }
         }
-        
+
     }
 }
