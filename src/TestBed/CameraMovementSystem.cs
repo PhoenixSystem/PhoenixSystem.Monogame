@@ -11,12 +11,12 @@ using PhoenixSystem.Engine.Extensions;
 using PhoenixSystem.Monogame.Components;
 using Microsoft.Xna.Framework;
 
-namespace TestBed
+namespace PhoenixSystem.Monogame.Sample
 {
     public class CameraMovementSystem : BaseSystem
     {
         private IEnumerable<CameraMovementAspect> _cameraAspects;
-        private IEnumerable<TestBedIntentAspect> _intentAspects;
+        private IEnumerable<SampleIntentAspect> _intentAspects;
 
         public CameraMovementSystem(IChannelManager cm, int priority, params string[] channels) : base(cm, priority, channels)
         {
@@ -24,7 +24,7 @@ namespace TestBed
         }
         public override void AddToGameManager(IGameManager gameManager)
         {
-            _intentAspects = gameManager.GetAspectList<TestBedIntentAspect>();
+            _intentAspects = gameManager.GetAspectList<SampleIntentAspect>();
             _cameraAspects = gameManager.GetAspectList<CameraMovementAspect>();
         }
 
@@ -41,7 +41,7 @@ namespace TestBed
             if(intentAspect!=null && cameraAspect != null)
             {
                 var velocity = cameraAspect.GetComponent<VelocityComponent>();
-                var intent = intentAspect.GetComponent<TestBedIntentComponent>();
+                var intent = intentAspect.GetComponent<SampleIntentComponent>();
                 var camera = cameraAspect.GetComponent<Camera2dComponent>();
                 Vector2 direction = new Vector2();
 

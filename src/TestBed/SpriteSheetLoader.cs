@@ -1,4 +1,4 @@
-﻿namespace TestBed
+﻿namespace PhoenixSystem.Monogame.Sample
 {
     using System;
     using System.Collections.Generic;

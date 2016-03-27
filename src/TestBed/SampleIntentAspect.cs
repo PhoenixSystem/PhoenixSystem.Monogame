@@ -6,10 +6,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TestBed
+namespace PhoenixSystem.Monogame.Sample
 {
-    [AssociatedComponents(typeof(TestBedIntentComponent),typeof(CameraIntentMappingComponent))]
-    public class TestBedIntentAspect : BaseAspect
+    [AssociatedComponents(typeof(SampleIntentComponent),typeof(CameraIntentMappingComponent))]
+    public class SampleIntentAspect : BaseAspect
     {
         
     }

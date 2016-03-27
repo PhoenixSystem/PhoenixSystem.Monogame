@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TestBed
+namespace PhoenixSystem.Monogame.Sample
 {
     [AssociatedComponents(typeof(PositionComponent), typeof(VelocityComponent), typeof(Camera2dComponent))]
     public class CameraMovementAspect : BaseAspect
