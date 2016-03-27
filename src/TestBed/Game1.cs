@@ -9,6 +9,8 @@ using PhoenixSystem.Monogame.Components;
 using PhoenixSystem.Monogame.Render;
 using PhoenixSystem.Monogame.Systems;
 using PhoenixSystem.Monogame.Aspects;
+using PhoenixSystem.Engine.System;
+
 namespace TestBed
 {
     /// <summary>
@@ -34,7 +36,8 @@ namespace TestBed
             _channelManager = new ChannelManager();
             _fileReader = fileReader;
             var entityManager = new EntityManager(_channelManager, new EntityPool());
-            _gameManager = new TestBedGameManager(new DefaultEntityAspectManager(_channelManager, entityManager), entityManager, _channelManager);
+            var systemManager = new SystemManager(_channelManager);
+            _gameManager = new TestBedGameManager(new DefaultEntityAspectManager(_channelManager, entityManager), entityManager, systemManager);
         }
 
         /// <summary>
@@ -159,14 +162,6 @@ namespace TestBed
             var teFadingSprite = _gameManager.EntityManager.Get("fadingSprite");
             teFadingSprite.MakeTextureRenderAspect(new Vector2(300, 150), frame.IsRotated, frame.Origin, frame.SourceRectangle,
                                                         frame.Texture, SpriteEffects.None, Color.White, 1.0f, 0.0f, "main")
-                                                        .AddComponent(new AnimationComponent()
-                                                        {
-                                                            Active = true,
-                                                            CurrentAnimation = "down",
-                                                            CurrentFrameIndex = 0,
-                                                            ShouldLoop = true,
-                                                            FPS = 8.0f
-                                                        })
                                                         .AddComponent(new LerpColorComponent()
                                                         {
                                                             From = Color.White,

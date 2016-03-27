@@ -1,12 +1,13 @@
 ﻿using PhoenixSystem.Engine.Channel;
 using PhoenixSystem.Engine.Entity;
 using PhoenixSystem.Engine.Game;
+using PhoenixSystem.Engine.System;
 
 namespace TestBed
 {
     public class TestBedGameManager : BaseGameManager
     {
-        public TestBedGameManager(IEntityAspectManager eam, IEntityManager em, IChannelManager cm) : base(eam, em, cm)
+        public TestBedGameManager(IEntityAspectManager eam, IEntityManager em, ISystemManager sm) : base(eam, em, sm, new ManagerManager())
         {
 
         }
