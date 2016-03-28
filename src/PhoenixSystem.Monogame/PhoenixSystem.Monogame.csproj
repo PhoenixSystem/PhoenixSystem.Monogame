@@ -35,10 +35,12 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Aspects\Camera2dAspect.cs" />
+    <Compile Include="Aspects\FPSAspect.cs" />
     <Compile Include="Aspects\LerpColorAspect.cs" />
     <Compile Include="Aspects\KeyframeTransformAspect.cs" />
     <Compile Include="Aspects\SpriteBatchAspect.cs" />
     <Compile Include="Components\Camera2dComponent.cs" />
+    <Compile Include="Components\FPSComponent.cs" />
     <Compile Include="Components\LerpColorComponent.cs" />
     <Compile Include="Components\KeyframeTransformComponent.cs" />
     <Compile Include="Components\SpriteBatchComponent.cs" />
@@ -67,6 +69,7 @@
     <Compile Include="Render\Sprite\SpriteFrame.cs" />
     <Compile Include="Render\Sprite\SpriteSheet.cs" />
     <Compile Include="Systems\Camera2dSystem.cs" />
+    <Compile Include="Systems\FPSSystem.cs" />
     <Compile Include="Systems\LerpColorSystem.cs" />
     <Compile Include="Systems\KeyframeTransformSystem.cs" />
     <Compile Include="Systems\MovementSystem.cs" />

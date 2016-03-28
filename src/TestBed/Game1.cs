@@ -153,9 +153,13 @@ namespace PhoenixSystem.Monogame.Sample
             teMove.CreateTextRenderEntity("I'm Moving!", Color.Black, new Vector2(0, 250), 5, 1.0f, font, "main")
                     .AddComponent(new VelocityComponent() { Direction = new Vector2(1, 1), Speed = new Vector2(75, 0) });
 
+            var fps = _gameManager.EntityManager.Get("fps", new string[] { "all" });
+            fps.CreateTextRenderEntity("future fps meter", Color.Black, new Vector2(0, GraphicsDevice.Viewport.Height - 30), 50, 1.0f, font, "main")
+                .AddComponent(new FPSComponent());
             _gameManager.AddEntity(te);
             _gameManager.AddEntity(te2);
-            //_gameManager.AddEntity(teMove);            
+            _gameManager.AddEntity(teMove);
+            _gameManager.AddEntity(fps);
         }
 
         private void CreateSpriteBatchEntity()
@@ -208,6 +212,7 @@ namespace PhoenixSystem.Monogame.Sample
             SampleIntentSystem IntentSystem = new SampleIntentSystem(_channelManager, 10, "all");
             CameraMovementSystem cameraMovementSystem = new CameraMovementSystem(_channelManager, 20, "default");
             KeyframeTransformSystem keyframesystem = new KeyframeTransformSystem(_channelManager, 26, "default");
+            FPSSystem fpsSystem = new FPSSystem(_channelManager, 10, "default");
             _gameManager.AddSystem(movementSystem);
             _gameManager.AddSystem(textureRenderSystem);
             _gameManager.AddSystem(spriteAnimationSystem);
@@ -216,6 +221,7 @@ namespace PhoenixSystem.Monogame.Sample
             _gameManager.AddSystem(IntentSystem);
             _gameManager.AddSystem(cameraMovementSystem);
             _gameManager.AddSystem(keyframesystem);
+            _gameManager.AddSystem(fpsSystem);
         }
         
         /// <summary>
