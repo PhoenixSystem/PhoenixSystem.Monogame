@@ -33,14 +33,6 @@ namespace PhoenixSystem.Monogame.Systems
 
         }
 
-        private float CalcDistance(float num1, float num2)
-        {
-            if (num1 > num2)
-                return num1 - num2;
-            else
-                return num2 - num1;
-        }
-
         public override void Update(ITickEvent tickEvent)
         {
             foreach (var aspect in _aspectList)

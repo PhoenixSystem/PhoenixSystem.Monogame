@@ -10,6 +10,9 @@ using PhoenixSystem.Monogame.Render;
 using PhoenixSystem.Monogame.Systems;
 using PhoenixSystem.Monogame.Aspects;
 using PhoenixSystem.Engine.System;
+using PhoenixSystem.Monogame.Render.Sprite;
+using PhoenixSystem.Monogame.Models;
+using System.Collections.Generic;
 
 namespace PhoenixSystem.Monogame.Sample
 {
@@ -91,7 +94,7 @@ namespace PhoenixSystem.Monogame.Sample
             CreateSpriteEntities(frame);
         }
 
-        private void CreateSpriteEntities(Render.Sprite.SpriteFrame frame)
+        private void CreateSpriteEntities(SpriteFrame frame)
         {
             // this is the sprite.  we make this animated by adding an animation component.  Also it moves because velocity.
             var teSprite = _gameManager.EntityManager.Get("sprite");
@@ -118,10 +121,20 @@ namespace PhoenixSystem.Monogame.Sample
                                                             Loop = true,
                                                             DurationInSeconds = 2.0f
                                                         });
+
+            var teKeyframe = teSprite.Clone();
+            teKeyframe.Name = "keyframeSprite";
+            var list = KeyframeTransformMaker.Start(new Vector2(150, 150), 1.0f, 0.0f)
+                                  .Then(durationInSeconds: 8.0f, position: new Vector2(150, 450))
+                                  .Then(durationInSeconds: 8.0f, position: new Vector2(350, 450))
+                                  .Then(durationInSeconds: 8.0f, position: new Vector2(350, 150))
+                                  .List;
+            teKeyframe.AddComponent(new KeyframeTransformComponent() { KeyFrames = list });
             // all entities need to be added to the game manager or they do nothing.
 
             _gameManager.AddEntity(teSprite);
             _gameManager.AddEntity(teFadingSprite);
+            _gameManager.AddEntity(teKeyframe);
         }
 
         private void CreateTextEntities()
@@ -142,7 +155,7 @@ namespace PhoenixSystem.Monogame.Sample
 
             _gameManager.AddEntity(te);
             _gameManager.AddEntity(te2);
-            _gameManager.AddEntity(teMove);            
+            //_gameManager.AddEntity(teMove);            
         }
 
         private void CreateSpriteBatchEntity()
@@ -194,6 +207,7 @@ namespace PhoenixSystem.Monogame.Sample
             Camera2dSystem cameraSystem = new Camera2dSystem(_channelManager, 50, "all");
             SampleIntentSystem IntentSystem = new SampleIntentSystem(_channelManager, 10, "all");
             CameraMovementSystem cameraMovementSystem = new CameraMovementSystem(_channelManager, 20, "default");
+            KeyframeTransformSystem keyframesystem = new KeyframeTransformSystem(_channelManager, 26, "default");
             _gameManager.AddSystem(movementSystem);
             _gameManager.AddSystem(textureRenderSystem);
             _gameManager.AddSystem(spriteAnimationSystem);
@@ -201,8 +215,9 @@ namespace PhoenixSystem.Monogame.Sample
             _gameManager.AddSystem(cameraSystem);
             _gameManager.AddSystem(IntentSystem);
             _gameManager.AddSystem(cameraMovementSystem);
+            _gameManager.AddSystem(keyframesystem);
         }
-
+        
         /// <summary>
         /// UnloadContent will be called once per game and is the place to unload
         /// game-specific content.

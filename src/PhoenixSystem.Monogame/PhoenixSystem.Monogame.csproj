@@ -36,11 +36,15 @@
   <ItemGroup>
     <Compile Include="Aspects\Camera2dAspect.cs" />
     <Compile Include="Aspects\LerpColorAspect.cs" />
+    <Compile Include="Aspects\KeyframeTransformAspect.cs" />
     <Compile Include="Aspects\SpriteBatchAspect.cs" />
     <Compile Include="Components\Camera2dComponent.cs" />
     <Compile Include="Components\LerpColorComponent.cs" />
+    <Compile Include="Components\KeyframeTransformComponent.cs" />
     <Compile Include="Components\SpriteBatchComponent.cs" />
     <Compile Include="Components\SpriteBatchIdentifierComponent.cs" />
+    <Compile Include="Models\KeyframeTransform.cs" />
+    <Compile Include="Models\KeyframeTransformMaker.cs" />
     <Compile Include="Render\AnimationCache.cs" />
     <Compile Include="Aspects\MovementAspect.cs" />
     <Compile Include="Aspects\SpriteAnimationAspect.cs" />
@@ -64,6 +68,7 @@
     <Compile Include="Render\Sprite\SpriteSheet.cs" />
     <Compile Include="Systems\Camera2dSystem.cs" />
     <Compile Include="Systems\LerpColorSystem.cs" />
+    <Compile Include="Systems\KeyframeTransformSystem.cs" />
     <Compile Include="Systems\MovementSystem.cs" />
     <Compile Include="Systems\SpriteAnimationSystem.cs" />
     <Compile Include="Systems\SpriteBatchRenderSystem.cs" />
