@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TestBed
+namespace PhoenixSystem.Monogame.Sample
 {
 #if WINDOWS || LINUX
     /// <summary>

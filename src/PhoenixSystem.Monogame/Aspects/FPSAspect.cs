@@ -1,15 +1,16 @@
 using PhoenixSystem.Engine.Aspect;
 using PhoenixSystem.Engine.Attributes;
+using PhoenixSystem.Monogame.Components;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TestBed
+namespace PhoenixSystem.Monogame.Aspects
 {
-    [AssociatedComponents(typeof(TestBedIntentComponent),typeof(CameraIntentMappingComponent))]
-    public class TestBedIntentAspect : BaseAspect
+    [AssociatedComponents(typeof(StringComponent), typeof(FPSComponent))]
+    public class FPSAspect : BaseAspect
     {
         
     }

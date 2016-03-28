@@ -11,7 +11,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		nuget.config = nuget.config
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestBed", "TestBed\TestBed.csproj", "{99D5519B-E09B-44F6-9214-A5CCEF4F8393}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhoenixSystem.Monogame.Sample", "TestBed\PhoenixSystem.Monogame.Sample.csproj", "{99D5519B-E09B-44F6-9214-A5CCEF4F8393}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

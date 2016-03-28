@@ -10,21 +10,21 @@ using Microsoft.Xna.Framework.Input;
 using PhoenixSystem.Engine.Extensions;
 using PhoenixSystem.Engine.Channel;
 
-namespace TestBed
+namespace PhoenixSystem.Monogame.Sample
 {
-    public class TestBedIntentSystem : BaseSystem
+    public class SampleIntentSystem : BaseSystem
     {
-        private IEnumerable<TestBedIntentAspect> _aspectList;
+        private IEnumerable<SampleIntentAspect> _aspectList;
         private KeyboardState _previousState;
         private KeyboardState _currentState;
 
-        public TestBedIntentSystem(IChannelManager cm, int priority, params string[] channels): base(cm, priority, channels)
+        public SampleIntentSystem(IChannelManager cm, int priority, params string[] channels): base(cm, priority, channels)
         {
 
         }
         public override void AddToGameManager(IGameManager gameManager)
         {
-            _aspectList = gameManager.GetAspectList<TestBedIntentAspect>();
+            _aspectList = gameManager.GetAspectList<SampleIntentAspect>();
         }
 
         public override void RemoveFromGameManager(IGameManager gameManager)
@@ -41,20 +41,20 @@ namespace TestBed
             if (intentAspect != null)
             {
                 var cameraInputMap = intentAspect.GetComponent<CameraIntentMappingComponent>();
-                var testBedIntent = intentAspect.GetComponent<TestBedIntentComponent>();
-                testBedIntent.Reset();
+                var SampleIntent = intentAspect.GetComponent<SampleIntentComponent>();
+                SampleIntent.Reset();
                 if (_currentState.IsKeyDown(cameraInputMap.MoveDownKeyboard))
-                    testBedIntent.CameraMoveDown = true;
+                    SampleIntent.CameraMoveDown = true;
                 if (_currentState.IsKeyDown(cameraInputMap.MoveUpKeyboard))
-                    testBedIntent.CameraMoveUp = true;
+                    SampleIntent.CameraMoveUp = true;
                 if (_currentState.IsKeyDown(cameraInputMap.MoveRightKeyboard))
-                    testBedIntent.CameraMoveRight = true;
+                    SampleIntent.CameraMoveRight = true;
                 if (_currentState.IsKeyDown(cameraInputMap.MoveLeftKeyboard))
-                    testBedIntent.CameraMoveLeft = true;
+                    SampleIntent.CameraMoveLeft = true;
                 if (_currentState.IsKeyDown(cameraInputMap.ZoomInKeyboard))
-                    testBedIntent.CameraZoomIn = true;
+                    SampleIntent.CameraZoomIn = true;
                 if (_currentState.IsKeyDown(cameraInputMap.ZoomOutKeyboard))
-                    testBedIntent.CameraZoomOut = true;
+                    SampleIntent.CameraZoomOut = true;
                         
             }
 

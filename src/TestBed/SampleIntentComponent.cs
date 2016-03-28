@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TestBed
+namespace PhoenixSystem.Monogame.Sample
 {
-    public class TestBedIntentComponent : BaseComponent
+    public class SampleIntentComponent : BaseComponent
     {
         public bool CameraMoveRight { get; set; } = false;
         public bool CameraMoveLeft { get; set; } = false;
@@ -18,7 +18,7 @@ namespace TestBed
 
         public override IComponent Clone()
         {
-            return new TestBedIntentComponent()
+            return new SampleIntentComponent()
             {
                 CameraMoveDown = this.CameraMoveDown,
                 CameraMoveLeft = this.CameraMoveLeft,

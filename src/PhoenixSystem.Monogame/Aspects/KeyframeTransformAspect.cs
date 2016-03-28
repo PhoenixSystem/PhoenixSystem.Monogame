@@ -7,10 +7,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PhoenixSystem.Monogame.Sample
+namespace PhoenixSystem.Monogame.Aspects
 {
-    [AssociatedComponents(typeof(PositionComponent), typeof(VelocityComponent), typeof(Camera2dComponent))]
-    public class CameraMovementAspect : BaseAspect
+    [AssociatedComponents(typeof(PositionComponent), typeof(ScaleComponent), typeof(RotationComponent), typeof(KeyframeTransformComponent))]
+    public class KeyframeTransformAspect : BaseAspect
     {
         
     }
