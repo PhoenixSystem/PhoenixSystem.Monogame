@@ -21,6 +21,8 @@ namespace PhoenixSystem.Monogame.Components
             get { return CurrentFrameIndex == KeyFrames.Count - 1 && CurrentFrame.IsComplete;  }
         }
 
+        public bool Loop { get; set; } = false;
+
         public KeyframeTransform CurrentFrame
         {
             get

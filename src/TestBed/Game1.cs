@@ -125,11 +125,12 @@ namespace PhoenixSystem.Monogame.Sample
             var teKeyframe = teSprite.Clone();
             teKeyframe.Name = "keyframeSprite";
             var list = KeyframeTransformMaker.Start(new Vector2(150, 150), 1.0f, 0.0f)
-                                  .Then(durationInSeconds: 8.0f, position: new Vector2(150, 450))
-                                  .Then(durationInSeconds: 8.0f, position: new Vector2(350, 450))
-                                  .Then(durationInSeconds: 8.0f, position: new Vector2(350, 150))
+                                  .Then(durationInSeconds: 4.0f, position: new Vector2(150, 450))
+                                  .Then(durationInSeconds: 4.0f, position: new Vector2(350, 450), scale: 2.0f)
+                                  .Then(durationInSeconds: 4.0f, position: new Vector2(350, 150), scale: 1.0f, rotation: 2.0f)
+                                  .Then(durationInSeconds: 4.0f, position: new Vector2(150,150), scale: 1.0f, rotation:0.0f)
                                   .List;
-            teKeyframe.AddComponent(new KeyframeTransformComponent() { KeyFrames = list });
+            teKeyframe.AddComponent(new KeyframeTransformComponent() { KeyFrames = list, Loop=true });
             // all entities need to be added to the game manager or they do nothing.
 
             _gameManager.AddEntity(teSprite);
