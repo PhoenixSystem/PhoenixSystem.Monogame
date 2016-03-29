@@ -141,7 +141,7 @@ namespace PhoenixSystem.Monogame.Sample
         {
             // a text component.  uses a helper extension method to add a bunch of components under the hood
             var te = _gameManager.EntityManager.Get("text", new string[] { "default" });
-            te.CreateTextRenderEntity("Use W,A,S,D to move the camera.\nQ,E to zoom", Color.Black, new Vector2(0, 0), 5, 1.0f, font, "main");
+            te.CreateTextRenderEntity("Use W,A,S,D to move the camera.\nQ,E to zoom", Color.Black, new Vector2(0, 0), 5, 1.0f, font, "ui");
 
             // more text.  I put this over on the right edge when I was messing with the camera to make sure the boundaries were working
             var te2 = _gameManager.EntityManager.Get("textWidth")
@@ -154,7 +154,7 @@ namespace PhoenixSystem.Monogame.Sample
                     .AddComponent(new VelocityComponent() { Direction = new Vector2(1, 1), Speed = new Vector2(75, 0) });
 
             var fps = _gameManager.EntityManager.Get("fps", new string[] { "all" });
-            fps.CreateTextRenderEntity("future fps meter", Color.Black, new Vector2(0, GraphicsDevice.Viewport.Height - 30), 50, 1.0f, font, "main")
+            fps.CreateTextRenderEntity("future fps meter", Color.Black, new Vector2(0, GraphicsDevice.Viewport.Height - 30), 50, 1.0f, font, "ui")
                 .AddComponent(new FPSComponent());
             _gameManager.AddEntity(te);
             _gameManager.AddEntity(te2);
@@ -168,6 +168,11 @@ namespace PhoenixSystem.Monogame.Sample
             var spriteBatch = _gameManager.EntityManager.Get("mainSpriteBatch", new string[] { "all" })
                                         .AddComponent(new SpriteBatchComponent())
                                         .AddComponent(new SpriteBatchIdentifierComponent() { Identifier = "main" });
+            var uiSpriteBatch = _gameManager.EntityManager.Get("uiSpriteBatch", new string[] { "all" })
+                                        .AddComponent(new SpriteBatchComponent() )
+                                        .AddComponent(new SpriteBatchIdentifierComponent() { Identifier = "ui" });
+
+            _gameManager.AddEntity(uiSpriteBatch);
             _gameManager.AddEntity(spriteBatch);
         }
 
@@ -180,12 +185,27 @@ namespace PhoenixSystem.Monogame.Sample
                   {
                       MaxZoom = 1.5f,
                       MinZoom = .5f,
-                      Zoom = 1f,
+                      Zoom = 1.0f,
                       Limits = new Rectangle(0, 0, GraphicsDevice.Viewport.Width * 2, GraphicsDevice.Viewport.Height * 2)
                   })
                   .AddComponent(new RotationComponent())
                   .AddComponent(new SpriteBatchIdentifierComponent() { Identifier = "main" })
                   .AddComponent(new VelocityComponent() { Speed = new Vector2(250, 250) });
+
+            // stuff drawn on this camera will be written to "screen coordinates"
+            var uiCamera = _gameManager.EntityManager.Get("uiCamera", new string[] { "all" });
+            uiCamera.AddComponent(new PositionComponent() { CurrentPosition = new Vector2(0, 0) })
+                  .AddComponent(new Camera2dComponent(GraphicsDevice.Viewport)
+                  {
+                      Limits = new Rectangle(0, 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height),                      
+                      MinZoom = .05f,
+                      MaxZoom = 1.5f,
+                      Zoom = 1.0f
+                  })
+                  .AddComponent(new RotationComponent())
+                  .AddComponent(new SpriteBatchIdentifierComponent() { Identifier = "ui" });
+
+            _gameManager.AddEntity(uiCamera);
             _gameManager.AddEntity(camera);
         }
 
