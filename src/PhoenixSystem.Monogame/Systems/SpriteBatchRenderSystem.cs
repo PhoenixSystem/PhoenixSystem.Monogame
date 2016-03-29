@@ -42,7 +42,7 @@ namespace PhoenixSystem.Monogame.Systems
 
         public void Draw(ITickEvent tickEvent)
         {
-            foreach(var cam in _cameraAspects)
+            foreach (var cam in _cameraAspects)
             {
                 var component = cam.GetComponent<Camera2dComponent>();
                 var identifier = cam.GetComponent<SpriteBatchIdentifierComponent>().Identifier;
@@ -51,7 +51,7 @@ namespace PhoenixSystem.Monogame.Systems
                 {
                     _cameras.Add(identifier, component);
                 }
-            }            
+            }
             foreach (var sbAspect in _spriteBatchAspects)
             {
                 var id = sbAspect.GetComponent<SpriteBatchIdentifierComponent>().Identifier;
@@ -61,6 +61,7 @@ namespace PhoenixSystem.Monogame.Systems
                 {
                     _spriteBatches.Add(id, new SpriteBatch(_graphicsDevice));
                 }
+
                 _spriteBatches[id].Begin(sb.SortMode, sb.BlendState, sb.SamplerState, sb.DepthStencilState, sb.RasterizerState, sb.Effect, _cameras[id].CameraMatrix);
             }
             IsDrawing = true;

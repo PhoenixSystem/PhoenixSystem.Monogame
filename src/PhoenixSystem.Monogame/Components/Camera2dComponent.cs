@@ -18,9 +18,34 @@ namespace PhoenixSystem.Monogame.Components
             _origin = new Vector2(viewport.Width / 2.0f, _viewport.Height / 2.0f);
         }
 
-        public Vector2 Parallax { get; set; } = Vector2.One;  
-        public float MaxZoom { get; set; }
-        public float MinZoom { get; set; }
+        public Vector2 Parallax { get; set; } = Vector2.One;
+
+        private Vector2 _zoomLimits = new Vector2(0.01f, 10.0f);  
+        public float MinZoom
+        {
+            get
+            {
+                return _zoomLimits.X;
+            }
+            set
+            {
+                _zoomLimits.X = value;
+                _zoom = MathHelper.Clamp(_zoom, _zoomLimits.X, _zoomLimits.Y);
+            }
+        }
+        
+        public float MaxZoom
+        {
+            get
+            {
+                return _zoomLimits.Y;
+            }
+            set
+            {
+                _zoomLimits.Y = value;
+                _zoom = MathHelper.Clamp(_zoom, _zoomLimits.X, _zoomLimits.Y);
+            }
+        }
 
         public Viewport ViewPort { get { return _viewport; } }
         private Rectangle? _limits = null;
@@ -37,7 +62,7 @@ namespace PhoenixSystem.Monogame.Components
             get { return _zoom; }
             set
             {
-                _zoom = MathHelper.Clamp(value, MinZoom, MaxZoom);
+                _zoom = MathHelper.Clamp(value, _zoomLimits.X, _zoomLimits.Y);
             }
         }
 

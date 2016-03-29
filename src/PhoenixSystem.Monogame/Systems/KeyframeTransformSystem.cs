@@ -41,17 +41,23 @@ namespace PhoenixSystem.Monogame.Systems
                 var rotation = aspect.GetComponent<RotationComponent>();
                 var keyframe = aspect.GetComponent<KeyframeTransformComponent>();
 
-                if (keyframe.IsComplete)
+                if (keyframe.IsComplete && !keyframe.Loop)
+                {
                     continue;
-
+                }                
+                
                 if (keyframe.CurrentFrame.IsComplete)
                 {
                     var lastFrame = keyframe.CurrentFrame;
-                    keyframe.CurrentFrameIndex++;
+                    if (keyframe.IsComplete && keyframe.Loop)
+                        keyframe.CurrentFrameIndex = 0;
+                    else
+                        keyframe.CurrentFrameIndex++;
                     keyframe.CurrentFrame.Position = new Vector4(lastFrame.Position.Y, keyframe.CurrentFrame.Position.Y,
                                                                     lastFrame.Position.W, keyframe.CurrentFrame.Position.W);
                     keyframe.CurrentFrame.Rotation = new Vector2(lastFrame.Rotation.Y, keyframe.CurrentFrame.Rotation.Y);
                     keyframe.CurrentFrame.Scale = new Vector2(lastFrame.Scale.Y, keyframe.CurrentFrame.Scale.Y);
+                    keyframe.CurrentFrame.LastAmount = 0.0f;
                 }                
                 var distance = 1.0f / (keyframe.CurrentFrame.DurationInSeconds / tickEvent.ElapsedGameTime.TotalSeconds);  
                 keyframe.CurrentFrame.LastAmount = MathHelper.Clamp(keyframe.CurrentFrame.LastAmount + (float)distance, 0.0f, 1.0f);
